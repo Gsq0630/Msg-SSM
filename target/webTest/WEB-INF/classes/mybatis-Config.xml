@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 引用mybatis.properties配置文件 -->
+	<properties resource="mybatis.properties" />
+	
+    <settings>  
+        <setting name="logImpl" value="LOG4J" />
+		<!--实现延迟加载-->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+
+		<!--实现二级缓存-->
+		<setting name="cacheEnabled" value="true"/>
+
+	</settings>
+
+	<typeAliases>
+		<package name="org.lanqiao.entity"/>
+	</typeAliases>
+
+	<!-- development : 开发模式 work : 工作模式 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<!-- 配置数据库连接信息 -->
+			<dataSource type="POOLED">
+				<!-- value属性值引用mybatis.properties配置文件中配置的值 -->
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 映射文件 -->
+	<mappers>
+		<mapper resource="org/lanqiao/mapper/MsgMapper.xml" />
+		<mapper resource="org/lanqiao/mapper/BigClassMapper.xml" />
+		<mapper resource="org/lanqiao/mapper/SmallClassMapper.xml" />
+	</mappers>
+</configuration>

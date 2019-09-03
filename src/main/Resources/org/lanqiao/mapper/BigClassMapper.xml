@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.BigClassMapper" >
+  <cache/>
+  <resultMap id="BigResultMap" type="org.lanqiao.entity.BigClass" >
+    <id column="Bclass_id" property="bclassId" jdbcType="INTEGER" />
+    <result column="Bclass_name" property="bclassName" jdbcType="VARCHAR" />
+    <collection property="smallClassList" select="org.lanqiao.mapper.SmallClassMapper.getSmallByBig" column="Bclass_id"></collection>
+  </resultMap>
+
+  <select id="getBigClass" resultMap="BigResultMap">
+    select * from bigclass
+  </select>
+
+  <sql id="Base_Column_List" >
+    Bclass_id, Bclass_name
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BigResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bigclass
+    where Bclass_id = #{bclassId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bigclass
+    where Bclass_id = #{bclassId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.BigClass" >
+    insert into bigclass (Bclass_id, Bclass_name)
+    values (#{bclassId,jdbcType=INTEGER}, #{bclassName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.BigClass" >
+    insert into bigclass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bclassId != null" >
+        Bclass_id,
+      </if>
+      <if test="bclassName != null" >
+        Bclass_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bclassId != null" >
+        #{bclassId,jdbcType=INTEGER},
+      </if>
+      <if test="bclassName != null" >
+        #{bclassName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.BigClass" >
+    update bigclass
+    <set >
+      <if test="bclassName != null" >
+        Bclass_name = #{bclassName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Bclass_id = #{bclassId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.BigClass" >
+    update bigclass
+    set Bclass_name = #{bclassName,jdbcType=VARCHAR}
+    where Bclass_id = #{bclassId,jdbcType=INTEGER}
+  </update>
+</mapper>

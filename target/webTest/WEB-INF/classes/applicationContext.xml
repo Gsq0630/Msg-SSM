@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+<!--    <bean id="a4" class="org.lanqiao.printer.A4Paper"/>-->
+<!--    <bean id="b5" class="org.lanqiao.printer.B5Paper"/>-->
+<!--    <bean id="black" class="org.lanqiao.printer.BlackInk"/>-->
+<!--    <bean id="color" class="org.lanqiao.printer.ColorInk"/>-->
+<!--    <bean id="printer" class="org.lanqiao.printer.Printer">-->
+<!--        <constructor-arg value="惠普"/>-->
+<!--        <property name="ink" ref="black"/>-->
+<!--        <property name="paper" ref="b5"/>-->
+<!--&lt;!&ndash;        <property name="str" value="惠普"></property>&ndash;&gt;-->
+<!--    </bean>-->
+
+    <!--扫描包-->
+    <context:component-scan base-package="org.lanqiao.printer"/>
+    <!--允许使用切面-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>
